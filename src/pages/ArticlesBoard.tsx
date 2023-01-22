@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import { fetchArticles } from "../redux/operation";
 import { ArticlesList } from "../components/ArticlesList";
 import { Container } from "../components/Container";
+import { Filter } from "../components/Filter";
 
 const ArticlesBoard: React.FC = () => {
   const { articlesList, isLoading, error } = useAppSelector((state) => state.articles);
@@ -16,8 +17,9 @@ const ArticlesBoard: React.FC = () => {
   return (
     <Container>
       <section>
-        {isLoading && <b>Loading jobs...</b>}
+        {isLoading && <b>Loading articles...</b>}
         {error && <b>{error}</b>}
+        <Filter/>
         <ArticlesList articlesList={articlesList} />
       </section>
     </Container>

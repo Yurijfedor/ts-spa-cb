@@ -11,9 +11,11 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { articlesReducer } from './articlesSlice'
+import { filterReducer } from './filterSlice'
 
 const rootReducer = combineReducers({
   articles: articlesReducer,
+  filter: filterReducer,
 })
 
 const persistConfig = {
