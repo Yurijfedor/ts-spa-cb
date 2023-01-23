@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/949.bfe128b0.chunk.js","mappings":"gIAGA,UAHiB,WACf,OAAO,yBAAK,wBACd,C","sources":["pages/NotFound.tsx"],"sourcesContent":["const NotFound = () => {\r\n  return <div>Page doesn't exsist!</div>;\r\n};\r\nexport default NotFound;\r\n"],"names":[],"sourceRoot":""}
