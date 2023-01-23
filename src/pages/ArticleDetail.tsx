@@ -1,45 +1,63 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
-import { Container } from "../components/Container";
+import { useAppSelector, useAppDispatch } from "../redux/hooks";
+import {Card, CardMedia, Button, Typography, Container} from '@mui/material';
 import { FiChevronLeft } from "react-icons/fi";
+import { fetchArticleById } from "../redux/operation";
+import { Box } from "@mui/material";
+
 
 
 const ArticleDetail: React.FC = () => {
 
-  const { articlesList } = useAppSelector((state) => state.articles);
+  const { articleItem } = useAppSelector((state) => state.articleItem);
+  console.log(articleItem);
+  
+  const dispatch = useAppDispatch();
   const { articleId } = useParams();
   const locationUrl = useLocation();
   const navigate = useNavigate();
 
-  const articleItem: any = articlesList.find(({ id }) => id == articleId);
+  useEffect(() => {
+    dispatch(fetchArticleById(articleId));
+  }, []);
+
   const handleClick = () => {
     navigate(locationUrl?.state?.from ?? "/");
   };
 
   const {
     title,
-    imageUrl, 
+    imageUrl,
+    summary
   } = articleItem;
   return (
-    <Container>
-      <img
-        src={imageUrl}
-        alt={title}
-      />
-      <h1>{title}</h1>
-      <p><span style={{backgroundColor: "yellow"}}>Lorem</span> <span style={{backgroundColor: "yellow"}}>nasa</span> ipsum dolor sit amet consectetur adipisicing elit. Delectus sit ullam at obcaecati inventore laudantium voluptatem commodi suscipit quibusdam sunt, fugit, quisquam accusantium, quo officiis illo ab doloribus! Omnis nobis laborum ex nihil voluptatem nam rerum dolorum qui asperiores in error officia molestias porro cupiditate, dolorem modi ad enim cum ipsum quo ratione. Tempore assumenda praesentium iusto numquam nulla, optio earum quidem quae est provident voluptates perferendis eum laborum! Animi amet temporibus odio porro eum nesciunt enim blanditiis voluptatibus molestias odit! A autem iusto voluptas quia magni molestias voluptatem quo, cupiditate architecto iure sunt quibusdam ab pariatur excepturi nobis nihil veritatis voluptates cum delectus, quasi magnam ea nam harum? Minus veritatis eligendi iste hic, id earum quas illum, aut aliquam porro adipisci doloribus esse rerum eius nam repudiandae et deleniti laboriosam ipsam sapiente nihil voluptate. Fuga, rerum incidunt. Dolores earum, assumenda modi, molestias consequatur neque exercitationem enim numquam ut doloremque, vero officiis dolore? Expedita provident vitae possimus odio maiores ipsum ea dolorum itaque incidunt pariatur, reprehenderit quo modi voluptatem necessitatibus. Tempore ipsa incidunt aliquam! Recusandae iusto optio provident error quis deserunt voluptates iure modi ducimus assumenda adipisci, ad cum amet sequi excepturi nisi nemo magnam minima fugit possimus. Nesciunt facere, quia eum sequi labore suscipit saepe aspernatur adipisci nobis distinctio ipsam accusantium perspiciatis illum hic cupiditate eveniet odit voluptate velit dolorem aut illo non eligendi beatae. Architecto maxime inventore doloribus dolorem. Ullam doloremque maxime quibusdam dolor libero laboriosam fuga, inventore nihil porro omnis maiores delectus nesciunt perspiciatis eveniet deleniti! Excepturi, blanditiis. Assumenda iusto accusantium nam eaque inventore amet deleniti illo perspiciatis. Quibusdam asperiores vitae aperiam qui ratione libero eum molestiae nihil totam, doloribus aliquam vero quis temporibus. Cumque, illo, provident dignissimos repudiandae vel doloribus similique assumenda dolorem aliquam commodi nihil officiis fugiat sit aperiam? Eos adipisci tempore delectus beatae placeat voluptates? Odit, nesciunt? Non vel odio ex quidem iure. Temporibus vero architecto eos laboriosam illum quisquam asperiores, repellat impedit, soluta adipisci dolore aperiam dolorem repudiandae ipsa illo voluptate ullam corrupti culpa earum dicta saepe! Eum dicta aut maxime iusto recusandae molestiae natus aliquam delectus, quod alias temporibus inventore eaque facere hic ab. Doloribus amet voluptatem earum, molestias eius odit consequatur voluptatum aspernatur asperiores facere? Ducimus dolores quis, earum quod quisquam esse, deleniti reprehenderit, illo ullam architecto assumenda. Consectetur explicabo harum ab dolore. Odit amet nobis beatae enim iure, id dicta, dolores eaque molestiae dolorum sed ut veniam eos numquam excepturi reiciendis magnam at molestias in quas. Quibusdam nam fugiat voluptates facilis amet dolorum veritatis sequi placeat minima cum voluptatibus, accusamus tempora! Incidunt non distinctio obcaecati, explicabo iusto dicta tempore autem accusamus corrupti minima cumque numquam aliquam rem, amet quam doloribus labore nesciunt aut nisi. Fuga error cupiditate voluptas consequuntur deserunt dolorum voluptatum corporis aut fugit numquam pariatur, natus quia. Unde quos, officiis tempore porro atque quod est magnam inventore ipsam quaerat consectetur laborum tenetur ratione vel, provident quibusdam vero, asperiores totam alias quasi eum officia blanditiis! Iusto aperiam hic enim quaerat numquam necessitatibus voluptate, assumenda nobis, minus quo deleniti voluptatibus!</p>
-
-      
-        <button
-          onClick={handleClick}
+    <>
+      <Card sx={{height: "245px", mb: "25px" }}>
+        <CardMedia
+          sx={{ height: "245px" }}
+          image={imageUrl}
+          title={title}
         >
-          <FiChevronLeft />
-          <span className="text-text-accent opacity-[1] z-10">
-            return to job board
-          </span>
-        </button>
-    </Container>
+        </CardMedia>
+      </Card>
+      <Container sx={{mt: "-95px", backgroundColor: "#fff", mb: '35px', py: "35px"}}>
+      <Typography variant="h4" sx={{textAlign: "center", mb: '50px', px: "75px", fontSize: '24px', lineHeight: 1.2, fontWeight: 400, color: '#363636'}}>{title}</Typography>
+      <Typography sx={{px: '75px'}}>{summary }</Typography>
+        <Typography sx={{ px: '75px', mb: '85px' }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque laborum odit quis esse numquam aliquam labore? Blanditiis assumenda fuga, iure, dolores veniam similique doloremque voluptatibus voluptatum quasi aliquid incidunt ipsa ad. Fugiat esse hic qui repellat impedit maiores quasi quo explicabo ipsum sapiente temporibus pariatur, eveniet debitis consequatur. Aperiam fugit eum iure autem illo est voluptatibus sed qui repellat nobis repellendus iste unde temporibus, consequatur quia quaerat eveniet sunt quibusdam, voluptas nihil aut ratione dolor amet. Natus iusto facilis perferendis ipsum ullam officiis saepe laboriosam pariatur maiores vitae necessitatibus, reiciendis nemo fugiat praesentium recusandae exercitationem esse dolore mollitia, ipsam enim fugit assumenda aperiam vel. Illum consectetur ipsa quasi nisi doloremque eius obcaecati, totam vel, qui autem adipisci dolores nostrum, molestiae ab dolore maiores. Adipisci ipsum inventore est ad facere nulla aliquam pariatur esse optio sapiente accusantium molestias praesentium ullam deserunt laborum dignissimos obcaecati laudantium iure, incidunt recusandae autem non fuga! Libero odio numquam dolorum sed deleniti accusamus sunt enim quibusdam. Totam cumque at beatae explicabo fugiat ratione vel libero rem praesentium et voluptatibus enim obcaecati aliquam aliquid, maxime, voluptatum numquam dolorum. Culpa est ea temporibus aperiam doloribus iste error. Libero atque recusandae accusamus expedita iusto fuga distinctio voluptate similique corporis nobis porro, nulla itaque ex nostrum quidem, mollitia nemo, exercitationem non obcaecati ducimus odit enim tempora. Harum, velit non sequi quisquam enim eveniet vitae fugiat mollitia optio labore earum officia expedita, ut consectetur sapiente. Quo assumenda repellendus iusto fuga officiis? Fugit, provident reiciendis fugiat exercitationem blanditiis voluptates dolorem quidem asperiores amet consequatur animi, ipsam numquam laboriosam sapiente nisi quae repellendus repudiandae. Earum sequi commodi optio magnam iste itaque maiores, non veniam sit explicabo molestiae illo assumenda eos labore numquam fugit deleniti saepe alias debitis harum deserunt molestias laborum nemo? Tenetur est ducimus totam unde facere reiciendis aut sit sunt? Labore quis, dolores, aperiam doloremque illum unde at explicabo maxime incidunt molestias magni dolore soluta omnis architecto delectus, natus numquam ad cum cupiditate laboriosam expedita possimus quae! Quos perspiciatis ullam distinctio. Nihil voluptatem rem sed modi possimus itaque consectetur iure enim ipsum, repudiandae tempore at qui amet quis quos tempora reprehenderit quod quae voluptates placeat! Repellendus nemo sint placeat sit praesentium officia, asperiores est iure in quaerat, minus rem cum, itaque quidem sapiente? Quo repellendus cumque maxime adipisci nesciunt praesentium incidunt perferendis veniam odit vero officia ipsam quis voluptatem nulla rem quidem tenetur, maiores nihil mollitia, deserunt cum culpa ea eius?
+        </Typography>
+                <Button
+        onClick={handleClick}
+        variant="text"
+      >
+        
+        <FiChevronLeft />
+        return to job board
+        </Button>
+
+</Container>
+     
+    </>
   );
 };
 

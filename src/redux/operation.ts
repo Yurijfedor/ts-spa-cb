@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { fetchingByIdInProgress, fetchingByIdSuccess, fetchingByIdError } from "./articleSlice";
 import {
   fetchingInProgress,
   fetchingSuccess,
@@ -20,3 +20,16 @@ export const fetchArticles = () => async (dispatch: any) => {
     dispatch(fetchingError(error.message));
   }
 };
+
+export const fetchArticleById = (id: string | undefined) => async (dispatch: any) => {
+  try {
+    dispatch(fetchingByIdInProgress());
+    const response = await axios.get(
+      `/articles/${id}`
+    );
+    dispatch(fetchingByIdSuccess(response.data));
+  } catch (error: any) {
+    dispatch(fetchingByIdError(error.message));
+  }
+};
+
