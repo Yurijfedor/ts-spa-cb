@@ -4,7 +4,6 @@ import { useAppSelector, useAppDispatch } from "../redux/hooks";
 import {Card, CardMedia, Button, Typography, Container} from '@mui/material';
 import { FiChevronLeft } from "react-icons/fi";
 import { fetchArticleById } from "../redux/operation";
-import { Box } from "@mui/material";
 
 
 
@@ -20,7 +19,7 @@ const ArticleDetail: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchArticleById(articleId));
-  }, []);
+  }, [articleId, dispatch]);
 
   const handleClick = () => {
     navigate(locationUrl?.state?.from ?? "/");

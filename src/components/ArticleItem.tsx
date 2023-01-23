@@ -8,7 +8,6 @@ import Card from '@mui/joy/Card';
 import CardOverflow from '@mui/joy/CardOverflow';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { ReadMore } from "./ReadMore";
 
 interface IProps {
   articleInfo: Article;

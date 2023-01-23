@@ -12,7 +12,7 @@ const ArticlesBoard: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchArticles());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container sx={{px: '75px', py: '50px'}}>

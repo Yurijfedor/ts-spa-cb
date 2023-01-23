@@ -2,7 +2,6 @@ import { ArticleItem } from "./ArticleItem";
 import { Article } from "../redux/articlesSlice";
 import { useAppSelector } from "../redux/hooks";
 import {Grid, Typography, Divider} from "@mui/material";
-import { useState } from "react";
 
 
 interface Iprops {
